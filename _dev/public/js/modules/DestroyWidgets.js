@@ -1,18 +1,15 @@
-import $ from 'jquery';
-
 class DestroyWidgets {
   constructor() {
-    this.ratingItems = $('.js-rmp-rating-item');
-    this.ratingItemsLists = $('.js-rmp-rating-icons-list');
+    this.ratingItems = document.querySelector(".js-rmp-rating-item");
+    this.ratingItemsLists = document.querySelector(".js-rmp-rating-icons-list");
     this.events();
   }
 
   events() {
-    this.ratingItems.css('cursor', 'auto');
-    this.ratingItems.off();
-    this.ratingItemsLists.off();
+    this.ratingItems.style.cursor = auto;
+    // this.ratingItems.off();
+    // this.ratingItemsLists.off();
   }
-
 }
 
 export default DestroyWidgets;

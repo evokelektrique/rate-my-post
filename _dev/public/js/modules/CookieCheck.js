@@ -1,43 +1,41 @@
-import $ from 'jquery';
-import rmp_frontend from 'rmp_frontend';
-import Cookies from 'js-cookie'
-import FreezeWidget from './FreezeWidget';
+import rmp_frontend from "rmp_frontend";
+import Cookies from "js-cookie";
+import FreezeWidget from "./FreezeWidget";
 
 class CookieCheck {
   constructor(widgetContainer, postID) {
     this.postID = postID;
     this.widgetContainer = widgetContainer;
-    this.existingCookie = Cookies.get('rmp-rate');
+    this.existingCookie = Cookies.get("rmp-rate");
     this.cookiesDisabled = rmp_frontend.cookieDisable;
     this.tnxMsg = rmp_frontend.afterVote;
-    this.msgContainer = $(this.widgetContainer + '.js-rmp-msg');
-    this.ratingWidget = $(this.widgetContainer + '.js-rmp-rating-widget');
+    this.msgContainer = document.querySelector(
+      this.widgetContainer + ".js-rmp-msg"
+    );
+    this.ratingWidget = document.querySelector(
+      this.widgetContainer + ".js-rmp-rating-widget"
+    );
     this.events();
   }
 
   events() {
-    if(this.cookiesDisabled == 2) {
+    if (this.cookiesDisabled == 2) {
       return;
     }
 
-    if(typeof this.existingCookie === 'undefined') {
+    if (typeof this.existingCookie === "undefined") {
       return;
     }
 
-    let postsArray = this.existingCookie.split(',');
-    //console.log(jQuery.inArray(this.postID, postsArray));
-    // if(!postsArray.includes(this.postID)) { // requires polyfill
-    if(jQuery.inArray(this.postID, postsArray) === -1) {
+    let postsArray = this.existingCookie.split(",");
+    if (!postsArray.includes(this.postID)) {
       return;
     }
 
-    let freezeWidget = new FreezeWidget(this.widgetContainer);
-    this.msgContainer.text(this.tnxMsg);
-    this.ratingWidget.addClass('rmp-rating-widget--has-rated')
-
+    this.msgContainer.innerText = this.tnxMsg;
+    this.ratingWidget.classList.add("rmp-rating-widget--has-rated");
+    new FreezeWidget(this.widgetContainer);
   }
-
-
 }
 
 export default CookieCheck;

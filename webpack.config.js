@@ -5,7 +5,6 @@ var config = {
     minimize: false
   },
   externals: {
-    jquery: 'jQuery',
     rmp_frontend: 'rmp_frontend',
     grecaptcha: 'grecaptcha',
   },

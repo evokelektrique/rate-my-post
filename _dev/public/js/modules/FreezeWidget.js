@@ -1,20 +1,23 @@
-import $ from 'jquery';
-
 class FreezeWidget {
   constructor(widgetContainer) {
     this.widgetContainer = widgetContainer;
-    this.ratingItems = $(this.widgetContainer + '.js-rmp-rating-item');
-    this.ratingTextContainer = $(this.widgetContainer + '.js-rmp-hover-text');
-    this.submitBtn = $(this.widgetContainer + '.js-submit-rating-btn');
+    this.ratingItems = document.querySelectorAll(
+      this.widgetContainer + ".js-rmp-rating-item"
+    );
+    this.ratingTextContainer = document.querySelector(
+      this.widgetContainer + ".js-rmp-hover-text"
+    );
+    this.submitBtn = document.querySelector(
+      this.widgetContainer + ".js-submit-rating-btn"
+    );
     this.events();
   }
 
   events() {
-    this.ratingItems.off();
-    this.submitBtn.off();
-    this.ratingItems.css('cursor', 'default');
-    this.submitBtn.removeClass('rmp-rating-widget__submit-btn--visible');
-    $(this.ratingTextContainer).text('');
+    document.querySelector('.js-rmp-rating-icons-list').style.pointerEvents = "none";
+
+    this.submitBtn.classList.remove("rmp-rating-widget__submit-btn--visible");
+    this.ratingTextContainer.innerText = "";
   }
 }
 
